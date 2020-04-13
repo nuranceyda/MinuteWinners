@@ -17,7 +17,6 @@ const server = express()
 const io = socketIO(server);
 
 let players = new Map();
-
 io.on('connection', function (socket) {
     let playerID;
 
@@ -38,23 +37,29 @@ io.on('connection', function (socket) {
 const gameLogicStart = function () {
     setTimeout(function () {
         // start game code here
-    }, 30000);
+        io.to(ROOM).emit('open-game-room', 10); // add updated leaderboard
+        waitRoomStart();
+    }, 3000);
 }
 
 const waitRoomStart = function () {
     setTimeout(function () {
         const output = {
-            nextGame:"",
-            top3Players:"",
-            yourRank:"",
-            numOfPlayers:""
+            nextGame: "",
+            top3Players: "",
+            yourRank: "",
+            numOfPlayers: ""
         };
-        io.to(ROOM).emit('open-wait-room', );
-    }, 60000);
+        io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard
+        gameLogicStart();
+    }, 6000);
 }
 
 
+gameLogicStart();
 
+
+// player object
 // {
 //     id:"JKBK",
 //     name:"myName",

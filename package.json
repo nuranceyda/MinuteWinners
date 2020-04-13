@@ -1,14 +1,13 @@
 {
-    "name": "minute-winners",
-    "description": "COMP 580 Project",
-    "license": "ISC",
-    "scripts": {
-      "start": "node server/scripts/index.js"
-    },
-    "main": "server/scripts/index.js",
-    "dependencies": {
-      "express": "latest",
-      "socketio": "latest"
-    }
+  "name": "minute-winners",
+  "description": "COMP 580 Project",
+  "license": "ISC",
+  "scripts": {
+    "start": "node server/scripts/index.js"
+  },
+  "main": "server/scripts/index.js",
+  "dependencies": {
+    "express": "latest",
+    "socketio": "latest"
   }
-  
+}
