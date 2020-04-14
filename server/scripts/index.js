@@ -24,7 +24,8 @@ io.on('connection', function (socket) {
         socket.join(ROOM);
         players.set(player.id, player);
         playerID = player.id;
-
+        console.log('New Player Joined');
+        console.log(player);
         socket.broadcast.to(ROOM).emit('players-update', players);
     });
 
@@ -47,8 +48,8 @@ const waitRoomStart = function () {
         const output = {
             nextGame: "",
             top3Players: "",
-            yourRank: "",
-            numOfPlayers: ""
+            playersMap: players,
+            numOfPlayers: players.values.length
         };
         io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard
         gameLogicStart();
@@ -57,6 +58,8 @@ const waitRoomStart = function () {
 
 
 gameLogicStart();
+
+
 
 
 // player object
