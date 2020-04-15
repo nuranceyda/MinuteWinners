@@ -7,6 +7,9 @@ const setupMainPage = function () {
     // alert that a player is waiting for a game to start
 
     socket.on('open-game-room', function (player) {
+        setTimeout(function(){
+
+        }, 60000);
         $('#rootContainer').text("open game room");
     });
 
@@ -21,3 +24,11 @@ $(document).ready(function () {
     socket = io();
     setupMainPage();
 });
+
+// games
+
+// as still as possible
+// tap as quickly as possible
+// jump around as much as possible
+// jog in place
+// karate chop
