@@ -9,4 +9,6 @@ const generatePlayer = function (length) {
         id: playerID,
         score: 0
     }
+
+    // TODO simplify player object
 };

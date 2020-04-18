@@ -1,4 +1,9 @@
 var playerID;
+
+const startGame = function() {
+    
+}
+
 const setupMainPage = function () {
     playerID = generatePlayer();
     socket.emit('join', playerID);
@@ -6,15 +11,14 @@ const setupMainPage = function () {
 
     // alert that a player is waiting for a game to start
 
-    socket.on('open-game-room', function (player) {
-        setTimeout(function(){
-            
-        }, 60000);
-        $('#rootContainer').text("open game room");
+    socket.on('open-game-room', function (next_game) {
+        startGame(next_game);
+        $('#rootContainer').text(next_game);
     });
 
-    socket.on('open-wait-room', function (player) {
-        $('#rootContainer').text("open wait room");
+    socket.on('open-wait-room', function (update) {
+        console.log(update)
+        $('#rootContainer').text('wait room');
     });
 }
 

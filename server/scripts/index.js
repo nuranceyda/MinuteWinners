@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
 
+const selectGame = function () {
+    const gamesList = ['tap-quickly', 'jog-in-place', 'stay-still'];
+    return gamesList[Math.floor(Math.random() * gamesList.length)];
+}
+
 // start express
 const server = express()
     .use(express.static('client'))
@@ -22,11 +27,13 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (player) {
         socket.join(ROOM);
-        players.set(player.id, player);
+        players.set(player.id, 1);
         playerID = player.id;
-        console.log('New Player Joined');
-        console.log(player);
+
+        console.log('New Player Joined' + playerID);
+
         socket.broadcast.to(ROOM).emit('players-update', players);
+        console.log(players.size);
     });
 
     socket.on('disconnect', function () {
@@ -35,36 +42,25 @@ io.on('connection', function (socket) {
     });
 });
 
-const gameLogicStart = function () {
+const gameLogicStart = function (nextGame) {
     setTimeout(function () {
-        // start game code here
-        io.to(ROOM).emit('open-game-room', 10); // add updated leaderboard
+        io.to(ROOM).emit('open-game-room', nextGame);
         waitRoomStart();
     }, 3000);
 }
 
 const waitRoomStart = function () {
     setTimeout(function () {
+        const nextgame = selectGame();
         const output = {
-            nextGame: "",
-            top3Players: "",
+            nextGame: nextgame,
+            highestScore: Math.max(...players.values()),
             playersMap: players,
-            numOfPlayers: players.values.length
+            numOfPlayers: players.size
         };
         io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard
-        gameLogicStart();
+        gameLogicStart(nextgame);
     }, 6000);
 }
 
-
-gameLogicStart();
-
-
-
-
-// player object
-// {
-//     id:"JKBK",
-//     name:"myName",
-//     score:0
-// }
+gameLogicStart(selectGame());
