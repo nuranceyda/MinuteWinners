@@ -1,7 +1,15 @@
 var playerID;
+var synth = window.speechSynthesis;
+var utterance = new SpeechSynthesisUtterance('Testing speech');
 
-const startGame = function() {
-    
+const startGame = function(next_game) {
+    synth.speak(utterance);
+    if (next_game === 'tap-quickly'){
+        tapGame();
+    }
+    // setup game on screen
+    // let that game run for a bit
+    // stop the game, send up scores
 }
 
 const setupMainPage = function () {
@@ -13,11 +21,13 @@ const setupMainPage = function () {
 
     socket.on('open-game-room', function (next_game) {
         startGame(next_game);
+        $('#rootContainer').empty();
         $('#rootContainer').text(next_game);
     });
 
     socket.on('open-wait-room', function (update) {
         console.log(update)
+        $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
     });
 }
