@@ -7,3 +7,19 @@ const generatePlayer = function () {
     }
     return playerID
 };
+
+const gameInstructions = function (game) {
+    let output = '.  For this game, you '
+    switch (game) {
+        case 'tap-quickly':
+            output += ' must tap the screen as many times as you can in one minute!'
+        case 'dance-around':
+            output += ' dance around and show us your best moves! The best dancer gets the highest score!'
+            break;
+        case 'stay-still':
+            output += ' have to stay as still as possible! Make sure you dont sneeze!';
+            break;
+    }
+
+    return output
+}

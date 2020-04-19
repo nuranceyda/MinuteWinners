@@ -1,4 +1,7 @@
 const tapGame = function () {
+    speaking.text = 'Start! Tap as much as you can!'
+    synth.speak(speaking);
+
     let rootContainer = $('#rootContainer');
     console.log('reached');
     let score = 0;
@@ -9,7 +12,11 @@ const tapGame = function () {
     rootContainer.append(tapButton);
 
     setTimeout(function () {
-        score = score *1000;
+        score = score * 1000;
+
+        speaking.text = 'Times up! you got ' + score + '. ';
+        synth.speak(speaking);
+
         socket.emit('score-update', {
             user: playerID,
             score: Math.round(score)
@@ -23,6 +30,9 @@ const stayStillGame = function () {
     let rootContainer = $('#rootContainer');
     let score = 0;
 
+    speaking.text = 'Start! Stay as still as you can!'
+    synth.speak(speaking);
+
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
         score = score + Math.abs(event.accelerationIncludingGravity.y);
@@ -32,12 +42,16 @@ const stayStillGame = function () {
     window.addEventListener('devicemotion', scoreIncrement)
 
     setTimeout(function () {
-        score = 100000-score;
+        score = Math.round(100000 - score);
+
+        speaking.text = 'Times up! you got ' + score + '. ';
+        synth.speak(speaking);
+
         socket.emit('score-update', {
             user: playerID,
-            score: Math.round(score)
+            score: score
         });
-        myScore = myScore + Math.round(score);
+        myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
     }, 19000)
@@ -48,6 +62,9 @@ const danceGame = function () {
     let rootContainer = $('#rootContainer');
     let score = 0;
 
+    speaking.text = 'Start! Dance as much as you can!'
+    synth.speak(speaking);
+
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
         score = score + Math.abs(event.accelerationIncludingGravity.y);
@@ -57,11 +74,15 @@ const danceGame = function () {
     window.addEventListener('devicemotion', scoreIncrement)
 
     setTimeout(function () {
+        score = Math.round(score);
+        speaking.text = 'Times up! you got ' + score + '. ';
+        synth.speak(speaking);
+
         socket.emit('score-update', {
             user: playerID,
-            score: Math.round(score)
+            score: score
         });
-        myScore = myScore + Math.round(score);
+        myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
     }, 19000)
