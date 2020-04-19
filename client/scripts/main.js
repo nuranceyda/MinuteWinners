@@ -27,6 +27,7 @@ const askForPermissions = function(){
               if (response == 'granted') {
                 speaking.text =  'Lets play!';
                 synth.speak(speaking);
+                $('#rootContainer').empty();
                 setupMainPage();
               }
             })
@@ -35,6 +36,7 @@ const askForPermissions = function(){
             // non iOS 13+
             speaking.text =  'Lets play!';
             synth.speak(speaking);
+            $('#rootContainer').empty();
             setupMainPage();
         }
 
