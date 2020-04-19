@@ -1,11 +1,12 @@
 var playerID;
+var myScore;
 var synth = window.speechSynthesis;
 var socket;
 var speaking = new SpeechSynthesisUtterance();
-speaking.pitch = 1.8;
+// speaking.pitch = 1.8;
 
-const startGame = function(next_game) {
-    switch (next_game){
+const startGame = function (next_game) {
+    switch (next_game) {
         case 'tap-quickly':
             tapGame();
             break;
@@ -20,36 +21,35 @@ const startGame = function(next_game) {
     // stop the game, send up scores
 }
 
-const askForPermissions = function(){
-        if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            DeviceOrientationEvent.requestPermission()
+const askForPermissions = function () {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
             .then(response => {
-              if (response == 'granted') {
-                speaking.text =  'Lets play!';
-                synth.speak(speaking);
-                $('#rootContainer').empty();
-                setupMainPage();
-                var snd = new Audio("resources/bensound-happyrock.mp3");
-                snd.volume = 0.095;
-                snd.play();
-              }
+                if (response == 'granted') {
+                    speaking.text = 'Lets play!';
+                    synth.speak(speaking);
+                    $('#rootContainer').empty();
+                    setupMainPage();
+                    var snd = new Audio("resources/bensound-happyrock.mp3");
+                    snd.volume = 0.095;
+                    snd.play();
+                }
             })
             .catch(console.error)
-        } else {
-            // non iOS 13+
-            var snd = new Audio("resources/bensound-happyrock.mp3");
-            snd.volume = 0.095;
-            snd.play();
-            speaking.text =  'Lets play!';
-            synth.speak(speaking);
-            $('#rootContainer').empty();
-            setupMainPage();
-        }
+    } else {
+        // non iOS 13+
+        speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
+        synth.speak(speaking);
+        var snd = new Audio("resources/bensound-happyrock.mp3");
+        snd.volume = 0.095;
+        snd.play();
+        $('#rootContainer').empty();
+        setupMainPage();
+    }
 
-        // TODO add code for microphone input
-        // start that initial voice over here
+    // TODO add code for microphone input
+    // start that initial voice over here
 }
-
 const setupMainPage = function () {
     // voice setup
     // for (let i = 0; i < window.speechSynthesis.getVoices().length; i++){
@@ -61,31 +61,36 @@ const setupMainPage = function () {
     $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
-    playerID = playerID.id;
+    myScore = 0;
     // alert that a player is waiting for a game to start
-
-    socket.on('open-game-room', function (next_game) {
-        startGame(next_game);
-        $('#rootContainer').empty();
-        $('#rootContainer').text(next_game);
-    });
 
     socket.on('open-wait-room', function (update) {
         console.log(update.playersMap);
         // speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
         // update.nextGame + " . Get ready to play!";
-        speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + update.playersMap.get(playerID) + '. The next game is  ' +  update.nextGame;
+        speaking.text = 'the highest score is now ' +
+            update.highestScore +
+            '. And your score is ' +
+            myScore +
+            '. The next game is  ' +
+            update.nextGame +
+            gameInstructions(update.nextGame);
+
         synth.speak(speaking);
-        sleep();
         $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
+
+        socket.on('open-game-room', function (next_game) {
+            $('#rootContainer').empty();
+            startGame(next_game);
+        });
     });
 }
-
 
 $(document).ready(function () {
     socket = io();
 });
+
 
 // games
 
