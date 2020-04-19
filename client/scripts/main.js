@@ -66,7 +66,7 @@ const setupMainPage = function () {
         console.log(update);
         // speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
         // update.nextGame + " . Get ready to play!";
-        speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + update.players.get(playerID) + '. The next game is  ' + ' update.nextGame;
+        speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + update.players.get(playerID) + '. The next game is  ' +  update.nextGame;
         synth.speak(speaking);
         sleep();
         $('#rootContainer').empty();
