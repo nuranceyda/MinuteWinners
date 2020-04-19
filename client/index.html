@@ -13,12 +13,18 @@
     <script src='scripts/helperScripts.js'></script>
     <script src='scripts/games.js'></script>
 
+    <link rel='stylesheet' type='text/css' href='styles/background.css'>
+    <link rel='stylesheet' type='text/css' href='styles/main.css'>
 
 </head>
 
 <body>
-    <div id='bodyContainer'></div>
-    <div align="center" style="color:purple; font-size: 800%" id='rootContainer'>
+    <div id='backgroundContainer'>
+        <div class='first'></div>
+        <div class='second'></div>
+        <div class='third'></div>
+    </div>
+    <div align="center" id='rootContainer'>
         <button onclick="askForPermissions()">Start!</button>
     </div>
 </body>

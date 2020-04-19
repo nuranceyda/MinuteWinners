@@ -24,9 +24,10 @@ const startGame = function (next_game) {
 
 const askForPermissions = function () {
     const initialize = function () {
+        $('#rootContainer').empty();
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
-        $('#rootContainer').empty();
+        $('#rootContainer').text(speaking.text);
         setupMainPage();
     }
 
@@ -47,8 +48,7 @@ const askForPermissions = function () {
     }
     // TODO add code for microphone input
 }
-const setupMainPage = function () { 
-    $('#rootContainer').empty();
+const setupMainPage = function () {
     playerID = generatePlayer();
     socket.emit('join', playerID);
     myScore = 0;
@@ -63,11 +63,9 @@ const setupMainPage = function () {
             '. The next game is  ' +
             update.nextGame +
             gameInstructions(update.nextGame);
-
         synth.speak(speaking);
         $('#rootContainer').empty();
-        $('#rootContainer').text('wait room');
-
+        $('#rootContainer').text(speaking.text);
     });
     socket.on('open-game-room', function (next_game) {
         if (initialized) {
