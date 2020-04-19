@@ -50,14 +50,7 @@ const askForPermissions = function () {
     // TODO add code for microphone input
     // start that initial voice over here
 }
-const setupMainPage = function () {
-    // voice setup
-    // for (let i = 0; i < window.speechSynthesis.getVoices().length; i++){
-    //     if (window.speechSynthesis.getVoices()[i].name.includes('Natural')){
-    //         speaking.voice = window.speechSynthesis.getVoices()[i];
-    //         break;
-    //     }
-    // }    
+const setupMainPage = function () { 
     $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
@@ -66,8 +59,6 @@ const setupMainPage = function () {
 
     socket.on('open-wait-room', function (update) {
         console.log(update.playersMap);
-        // speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
-        // update.nextGame + " . Get ready to play!";
         speaking.text = 'the highest score is now ' +
             update.highestScore +
             '. And your score is ' +
