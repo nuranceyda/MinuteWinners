@@ -36,6 +36,7 @@ const askForPermissions = function () {
                 if (response == 'granted') {
                     initialize();
                     var snd = new Audio("resources/bensound-happyrock.mp3");
+                    snd.volume = 0.095;
                     snd.play();
                 }
             })
@@ -46,14 +47,7 @@ const askForPermissions = function () {
     }
     // TODO add code for microphone input
 }
-const setupMainPage = function () {
-    // voice setup
-    // for (let i = 0; i < window.speechSynthesis.getVoices().length; i++){
-    //     if (window.speechSynthesis.getVoices()[i].name.includes('Natural')){
-    //         speaking.voice = window.speechSynthesis.getVoices()[i];
-    //         break;
-    //     }
-    // }    
+const setupMainPage = function () { 
     $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
