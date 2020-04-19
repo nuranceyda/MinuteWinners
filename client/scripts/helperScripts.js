@@ -13,6 +13,7 @@ const gameInstructions = function (game) {
     switch (game) {
         case 'tap-quickly':
             output += ' must tap the screen as many times as you can in one minute!'
+            break;
         case 'dance-around':
             output += ' dance around and show us your best moves! The best dancer gets the highest score!'
             break;
