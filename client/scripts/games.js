@@ -1,3 +1,6 @@
+var speaking = new SpeechSynthesisUtterance();
+speaking.pitch = 1.8;
+
 const tapGame = function(){
     let rootContainer = $('#rootContainer');
     let score = 0;
@@ -28,5 +31,9 @@ const stayStillGame = function(){
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
     }, 50000)
+
+}
+
+const danceGame = function() {
 
 }

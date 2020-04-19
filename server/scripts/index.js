@@ -8,7 +8,7 @@ const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
 
 const selectGame = function () {
-    const gamesList = ['tap-quickly', 'jog-in-place', 'stay-still'];
+    const gamesList = ['tap-quickly', 'dance-around', 'stay-still'];
     return gamesList[Math.floor(Math.random() * gamesList.length)];
 }
 
@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (player) {
         socket.join(ROOM);
-        players.set(player.id, 1);
+        players.set(player.id, 0);
         playerID = player.id;
 
         console.log('New Player Joined' + playerID);
@@ -40,6 +40,10 @@ io.on('connection', function (socket) {
         players.delete(playerID);
         socket.broadcast.to(ROOM).emit('players-update', players);
     });
+
+    socket.on('score-update', function(scoreInfo){
+        players.set(scoreInfo.playerID, players.get(scoreInfo.playerID) + scoreInfo.score);
+    })
 });
 
 const gameLogicStart = function (nextGame) {

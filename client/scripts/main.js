@@ -5,8 +5,15 @@ var speaking = new SpeechSynthesisUtterance();
 speaking.pitch = 1.8;
 
 const startGame = function(next_game) {
-    if (next_game === 'tap-quickly'){
-        tapGame();
+    switch (next_game){
+        case 'tap-quickly':
+            tapGame();
+            break;
+        case 'dance-around':
+            danceGame();
+            break;
+        case 'stay-still':
+            stayStillGame();
     }
     // setup game on screen
     // let that game run for a bit
@@ -29,13 +36,20 @@ const askForPermissions = function(){
             setupMainPage();
         }
 
-        // TODO add code for 
+        // TODO add code for microphone input
+        // start that initial voice over here
     });
     $('#rootContainer').append(startButton);
 }
 
-
 const setupMainPage = function () {
+    // voice setup
+    // for (let i = 0; i < window.speechSynthesis.getVoices().length; i++){
+    //     if (window.speechSynthesis.getVoices()[i].name.includes('Natural')){
+    //         speaking.voice = window.speechSynthesis.getVoices()[i];
+    //         break;
+    //     }
+    // }    
     $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
