@@ -21,8 +21,6 @@ const startGame = function(next_game) {
 }
 
 const askForPermissions = function(){
-    let startButton = $('<button>Start the Game!</button>');
-    startButton.click(function(){
         if (typeof DeviceMotionEvent.requestPermission === 'function') {
             DeviceOrientationEvent.requestPermission()
             .then(response => {
@@ -42,8 +40,6 @@ const askForPermissions = function(){
 
         // TODO add code for microphone input
         // start that initial voice over here
-    });
-    $('#rootContainer').append(startButton);
 }
 
 const setupMainPage = function () {
@@ -80,7 +76,6 @@ const setupMainPage = function () {
 
 $(document).ready(function () {
     socket = io();
-    askForPermissions();
 });
 
 // games

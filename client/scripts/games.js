@@ -3,6 +3,7 @@ speaking.pitch = 1.8;
 
 const tapGame = function(){
     let rootContainer = $('#rootContainer');
+    
     let score = 0;
     let tapButton = $('<button>Tap me quickly!</button>');
     tapButton.click(function() {
