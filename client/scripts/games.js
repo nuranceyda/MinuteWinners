@@ -3,7 +3,6 @@ const tapGame = function () {
     synth.speak(speaking);
 
     let rootContainer = $('#rootContainer');
-    console.log('reached');
     let score = 0;
     let tapButton = $('<button>Tap me quickly!</button>');
     tapButton.click(function () {
@@ -23,7 +22,7 @@ const tapGame = function () {
         });
         myScore = myScore + score;
         $('#rootContainer').empty()
-    }, 19000)
+    }, 59000)
 }
 
 const stayStillGame = function () {
@@ -37,12 +36,11 @@ const stayStillGame = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
         score = score + Math.abs(event.accelerationIncludingGravity.y);
         score = score + Math.abs(event.accelerationIncludingGravity.z);
-        console.log(score);
     }
     window.addEventListener('devicemotion', scoreIncrement)
 
     setTimeout(function () {
-        score = Math.round(100000 - score);
+        score = Math.abs(Math.round(100000 - score));
 
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
@@ -54,7 +52,7 @@ const stayStillGame = function () {
         myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
-    }, 19000)
+    }, 59000)
 
 }
 
@@ -69,7 +67,6 @@ const danceGame = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
         score = score + Math.abs(event.accelerationIncludingGravity.y);
         score = score + Math.abs(event.accelerationIncludingGravity.z);
-        console.log(score);
     }
     window.addEventListener('devicemotion', scoreIncrement)
 
@@ -85,5 +82,5 @@ const danceGame = function () {
         myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
-    }, 19000)
+    }, 59000)
 }

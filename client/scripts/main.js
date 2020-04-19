@@ -2,6 +2,7 @@ var playerID;
 var myScore;
 var synth = window.speechSynthesis;
 var socket;
+var initialized = false;
 var speaking = new SpeechSynthesisUtterance();
 // speaking.pitch = 1.8;
 
@@ -22,14 +23,18 @@ const startGame = function (next_game) {
 }
 
 const askForPermissions = function () {
+    const initialize = function () {
+        speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
+        synth.speak(speaking);
+        $('#rootContainer').empty();
+        setupMainPage();
+    }
+
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
             .then(response => {
                 if (response == 'granted') {
-                    speaking.text = 'Lets play!';
-                    synth.speak(speaking);
-                    $('#rootContainer').empty();
-                    setupMainPage();
+                    initialize();
                     var snd = new Audio("resources/bensound-happyrock.mp3");
                     snd.play();
                 }
@@ -37,14 +42,9 @@ const askForPermissions = function () {
             .catch(console.error)
     } else {
         // non iOS 13+
-        speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
-        synth.speak(speaking);
-        $('#rootContainer').empty();
-        setupMainPage();
+        initialize()
     }
-
     // TODO add code for microphone input
-    // start that initial voice over here
 }
 const setupMainPage = function () {
     // voice setup
@@ -61,6 +61,7 @@ const setupMainPage = function () {
     // alert that a player is waiting for a game to start
 
     socket.on('open-wait-room', function (update) {
+        initialized = true;
         speaking.text = 'the highest score is now ' +
             update.highestScore +
             '. And your score is ' +
@@ -73,11 +74,15 @@ const setupMainPage = function () {
         $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
 
-        socket.on('open-game-room', function (next_game) {
-            $('#rootContainer').empty();
-            startGame(next_game);
-        });
     });
+    socket.on('open-game-room', function (next_game) {
+        if (initialized) {
+            $('#rootContainer').empty();
+            console.log('game started');
+            startGame(next_game);
+        }
+    });
+
 }
 
 $(document).ready(function () {
