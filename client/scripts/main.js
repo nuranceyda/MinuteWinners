@@ -27,12 +27,16 @@ const askForPermissions = function(){
             DeviceOrientationEvent.requestPermission()
             .then(response => {
               if (response == 'granted') {
+                speaking.text =  'Lets play!';
+                synth.speak(speaking);
                 setupMainPage();
               }
             })
             .catch(console.error)
         } else {
             // non iOS 13+
+            speaking.text =  'Lets play!';
+            synth.speak(speaking);
             setupMainPage();
         }
 
@@ -58,8 +62,6 @@ const setupMainPage = function () {
 
     socket.on('open-game-room', function (next_game) {
         startGame(next_game);
-        speaking.text = 'The game is starting! Gooooo!';
-        synth.speak(speaking);
         $('#rootContainer').empty();
         $('#rootContainer').text(next_game);
     });
@@ -69,6 +71,7 @@ const setupMainPage = function () {
         speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
         update.nextGame + " . Get ready to play!";
         synth.speak(speaking);
+        sleep();
         $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
     });
