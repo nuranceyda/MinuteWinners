@@ -7,11 +7,26 @@ const tapGame = function(){
     });
 
     setTimeout(function(){
-        // send up score to server
+        socket.emit('score-update', {user:playerID, score:score});
         $('#rootContainer').empty()
     }, 50000)
 }
 
 const stayStillGame = function(){
+    let rootContainer = $('#rootContainer');
+    let score = 0;
+
+    const scoreIncrement = function() {
+        score = score + event.accelerationIncludingGravity.x;
+        score = score + event.accelerationIncludingGravity.y;
+        score = score + event.accelerationIncludingGravity.z;
+    }
+    window.addEventListener('devicemotion', scoreIncrement)
+  
+    setTimeout(function(){
+        socket.emit('score-update', {user:playerID, score:score});
+        window.removeEventListener('devicemotion', scoreIncrement);
+        $('#rootContainer').empty()
+    }, 50000)
 
 }

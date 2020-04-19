@@ -1,9 +1,10 @@
 var playerID;
 var synth = window.speechSynthesis;
-var utterance = new SpeechSynthesisUtterance('Testing speech');
+var socket;
+var speaking = new SpeechSynthesisUtterance();
+speaking.pitch = 1.8;
 
 const startGame = function(next_game) {
-    synth.speak(utterance);
     if (next_game === 'tap-quickly'){
         tapGame();
     }
@@ -12,31 +13,57 @@ const startGame = function(next_game) {
     // stop the game, send up scores
 }
 
+const askForPermissions = function(){
+    let startButton = $('<button>Start the Game!</button>');
+    startButton.click(function(){
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+            DeviceOrientationEvent.requestPermission()
+            .then(response => {
+              if (response == 'granted') {
+                setupMainPage();
+              }
+            })
+            .catch(console.error)
+        } else {
+            // non iOS 13+
+            setupMainPage();
+        }
+
+        // TODO add code for 
+    });
+    $('#rootContainer').append(startButton);
+}
+
+
 const setupMainPage = function () {
+    $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
     playerID = playerID.id;
-
     // alert that a player is waiting for a game to start
 
     socket.on('open-game-room', function (next_game) {
         startGame(next_game);
+        speaking.text = 'The game is starting! Gooooo!';
+        synth.speak(speaking);
         $('#rootContainer').empty();
         $('#rootContainer').text(next_game);
     });
 
     socket.on('open-wait-room', function (update) {
         console.log(update)
+        speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
+        update.nextGame + " . Get ready to play!";
+        synth.speak(speaking);
         $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
     });
 }
 
-var socket;
 
 $(document).ready(function () {
     socket = io();
-    setupMainPage();
+    askForPermissions();
 });
 
 // games

@@ -46,7 +46,7 @@ const gameLogicStart = function (nextGame) {
     setTimeout(function () {
         io.to(ROOM).emit('open-game-room', nextGame);
         waitRoomStart();
-    }, 3000);
+    }, 10000);
 }
 
 const waitRoomStart = function () {
@@ -60,7 +60,7 @@ const waitRoomStart = function () {
         };
         io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard
         gameLogicStart(nextgame);
-    }, 6000);
+    }, 20000);
 }
 
 gameLogicStart(selectGame());
