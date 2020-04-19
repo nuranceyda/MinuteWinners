@@ -27,23 +27,24 @@ io.on('connection', function (socket) {
 
     socket.on('join', function (player) {
         socket.join(ROOM);
-        players.set(player.id, 0);
-        playerID = player.id;
+        players.set(player, 0);
+        playerID = player;
 
-        console.log('New Player Joined' + playerID);
+        console.log('New player ' + playerID + ' joined. There are now ' + players.size + ' players');
 
         socket.broadcast.to(ROOM).emit('players-update', players);
-        console.log(players.size);
-    });
 
-    socket.on('disconnect', function () {
-        players.delete(playerID);
-        socket.broadcast.to(ROOM).emit('players-update', players);
-    });
+        socket.on('disconnect', function () {
+            players.delete(playerID);
+            socket.broadcast.to(ROOM).emit('players-update', players);
+            console.log('Player ' + playerID + ' left, there are now ' + players.size + ' players left');
+        });
 
-    socket.on('score-update', function(scoreInfo){
-        players.set(scoreInfo.playerID, players.get(scoreInfo.playerID) + scoreInfo.score);
-    })
+        socket.on('score-update', function (scoreInfo) {
+            players.set(scoreInfo.user, players.get(scoreInfo.user) + scoreInfo.score);
+            console.log(scoreInfo.user + " got " + players.get(scoreInfo.user));
+        })
+    });
 });
 
 const gameLogicStart = function (nextGame) {
@@ -55,11 +56,14 @@ const gameLogicStart = function (nextGame) {
 
 const waitRoomStart = function () {
     setTimeout(function () {
+        const newArray = (Array.from(players.values())).filter(function (value) {
+            return !Number.isNaN(value);
+        });
+
         const nextgame = selectGame();
         const output = {
             nextGame: nextgame,
-            highestScore: Math.max(...players.values()),
-            playersMap: players,
+            highestScore: Math.max(...newArray),
             numOfPlayers: players.size
         };
         io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard

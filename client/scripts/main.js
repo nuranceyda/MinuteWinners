@@ -1,4 +1,5 @@
 var playerID;
+var myScore;
 var synth = window.speechSynthesis;
 var socket;
 var speaking = new SpeechSynthesisUtterance();
@@ -45,7 +46,6 @@ const askForPermissions = function(){
         // TODO add code for microphone input
         // start that initial voice over here
 }
-
 const setupMainPage = function () {
     // voice setup
     // for (let i = 0; i < window.speechSynthesis.getVoices().length; i++){
@@ -57,31 +57,27 @@ const setupMainPage = function () {
     $('#rootContainer').empty();
     playerID = generatePlayer();
     socket.emit('join', playerID);
-    playerID = playerID.id;
+    myScore = 0;
     // alert that a player is waiting for a game to start
 
     socket.on('open-game-room', function (next_game) {
-        startGame(next_game);
         $('#rootContainer').empty();
-        $('#rootContainer').text(next_game);
+        startGame(next_game);
     });
 
     socket.on('open-wait-room', function (update) {
-        console.log(update);
-        // speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
-        // update.nextGame + " . Get ready to play!";
-        speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + update.playersMap.get(playerID) + '. The next game is  ' +  update.nextGame;
+        speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + myScore + '. The next game is  ' +  update.nextGame;
+ 
         synth.speak(speaking);
-        sleep();
         $('#rootContainer').empty();
         $('#rootContainer').text('wait room');
     });
 }
 
-
 $(document).ready(function () {
     socket = io();
 });
+
 
 // games
 
