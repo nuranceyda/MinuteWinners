@@ -30,12 +30,16 @@ const askForPermissions = function(){
                 $('#rootContainer').empty();
                 setupMainPage();
                 var snd = new Audio("resources/bensound-happyrock.mp3");
+                snd.volume = 0.095;
                 snd.play();
               }
             })
             .catch(console.error)
         } else {
             // non iOS 13+
+            var snd = new Audio("resources/bensound-happyrock.mp3");
+            snd.volume = 0.095;
+            snd.play();
             speaking.text =  'Lets play!';
             synth.speak(speaking);
             $('#rootContainer').empty();
@@ -67,7 +71,7 @@ const setupMainPage = function () {
     });
 
     socket.on('open-wait-room', function (update) {
-        console.log(update);
+        console.log(update.playersMap);
         // speaking.text =  'The winner is ERROR with a score of ERROR. ' + 'The next game is ' +
         // update.nextGame + " . Get ready to play!";
         speaking.text = 'the highest score was ' + update.highestScore + '. Your score is now ' + update.playersMap.get(playerID) + '. The next game is  ' +  update.nextGame;
