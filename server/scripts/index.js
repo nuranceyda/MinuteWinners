@@ -51,7 +51,7 @@ const gameLogicStart = function (nextGame) {
     setTimeout(function () {
         io.to(ROOM).emit('open-game-room', nextGame);
         waitRoomStart();
-    }, 45000);
+    }, 40000);
 }
 
 const waitRoomStart = function () {
