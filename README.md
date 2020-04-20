@@ -18,3 +18,5 @@ Stay Sneaky Still: keep your phone as still as possible to earn more!
 
 After each game, the highest score of all the players is annouced, followed by your own score.
 Keep playing to try and get the highest score of all your friends!
+
+*Note: you can use a computer to play, but you will not be able to earn as many points because we unfornately can't feel how much you are dancing or staying still!
