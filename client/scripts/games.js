@@ -2,6 +2,7 @@ const tapGame = function () {
     speaking.text = 'Start! Tap as much as you can!'
     synth.speak(speaking);
     globalmus.src = "resources/tapmusic.mp3";
+    globalmus.load();
     globalmus.play();
     let rootContainer = $('#rootContainer');
     let score = 10;

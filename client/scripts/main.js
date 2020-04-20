@@ -56,7 +56,14 @@ const setupMainPage = function () {
 
     socket.on('open-wait-room', function (update) {
         initialized = true;
+        globalmus.src = "resources/tapmusic.mp3";
+        globalmus.load();
+        globalmus.src = "resources/dancemusic.mp3";
+        globalmus.load();
+        globalmus.src = "resources/spymusic.mp3";
+        globalmus.load();
         globalmus.src = "resources/lobbymusic.mp3";
+        globalmus.load();
         globalmus.volume = 0.095;
         globalmus.play();
         var playerstr = playerID.substring(0, 5);
