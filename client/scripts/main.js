@@ -68,7 +68,7 @@ const setupMainPage = function () {
         globalmus.volume = 0.095;
         globalmus.play();
         var playerstr = playerID.substring(0, 5);
-        speaking.text = playerstr + ' has the highest score of ' +
+        speaking.text = update.topPlayer + ' has the highest score of ' +
             update.highestScore +
             '. You are ' + playerstr + ' And your score is ' +
             myScore +

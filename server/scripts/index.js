@@ -51,7 +51,7 @@ const gameLogicStart = function (nextGame) {
     setTimeout(function () {
         io.to(ROOM).emit('open-game-room', nextGame);
         waitRoomStart();
-    }, 40000);
+    }, 35000);
 }
 
 const waitRoomStart = function () {
@@ -59,16 +59,19 @@ const waitRoomStart = function () {
         const newArray = (Array.from(players.values())).filter(function (value) {
             return !Number.isNaN(value);
         });
-
+        var ids = Array.from(players.keys());
+        var highscore = Math.max(...newArray);
+        var topPlayr = ids[newArray.indexOf(highscore)];
         const nextgame = selectGame();
         const output = {
+            topPlayer: topPlayr,
             nextGame: nextgame,
-            highestScore: Math.max(...newArray),
+            highestScore: highscore,
             numOfPlayers: players.size
         };
         io.to(ROOM).emit('open-wait-room', output); // add updated leaderboard
         gameLogicStart(nextgame);
-    }, 60000);
+    }, 45000);
 }
 
 gameLogicStart(selectGame());
