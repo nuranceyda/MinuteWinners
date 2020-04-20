@@ -1,8 +1,11 @@
 const generatePlayer = function () {
     let playerID = '';
     let length = 5;
-    var characters = ['Zebra', 'Lion', 'Owl', 'Shark', 'Bear', 'Dog', 'Cat', 'Monkey'];
+    var characters = ['Owl ', 'Dog ', 'Cat '];
         playerID = characters[(Math.floor(Math.random() * characters.length))];
+        for (var i = 0; i < length; i++) {
+        playerID += (Math.floor(Math.random() * 26)).toString();
+        }
     return playerID
 };
 

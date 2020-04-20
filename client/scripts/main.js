@@ -4,7 +4,7 @@ var synth = window.speechSynthesis;
 var socket;
 var initialized = false;
 var speaking = new SpeechSynthesisUtterance();
-var lobbymus = new Audio("resources/lobbymusic.mp3");
+var globalmus = new Audio("resources/lobbymusic.mp3");
 // speaking.pitch = 1.8;
 
 const startGame = function (next_game) {
@@ -26,8 +26,8 @@ const startGame = function (next_game) {
 const askForPermissions = function () {
     const initialize = function () {
         $('#rootContainer').empty();;
-        lobbymus.volume = 0.1;
-        lobbymus.play();
+        globalmus.volume = 0.3;
+        globalmus.play();
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
         $('#rootContainer').text(speaking.text);
@@ -56,12 +56,13 @@ const setupMainPage = function () {
 
     socket.on('open-wait-room', function (update) {
         initialized = true;
-        lobbymus.pause();
-        lobbymus.volume = 0.095;
-        lobbymus.play();
-        speaking.text = playerID + ' has the highest score of ' +
+        globalmus.src = "resources/lobbymusic.mp3";
+        globalmus.volume = 0.095;
+        globalmus.play();
+        var playerstr = playerID.substring(0, 5);
+        speaking.text = playerstr + ' has the highest score of ' +
             update.highestScore +
-            '. You are ' + playerID + ' And your score is ' +
+            '. You are ' + playerstr + ' And your score is ' +
             myScore +
             '. The next game is  ' +
             update.nextGame +
@@ -72,7 +73,6 @@ const setupMainPage = function () {
     });
     socket.on('open-game-room', function (next_game) {
         if (initialized) {
-            lobbymus.pause();
             $('#rootContainer').empty();
             console.log('game started');
             startGame(next_game);

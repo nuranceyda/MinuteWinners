@@ -1,9 +1,8 @@
 const tapGame = function () {
     speaking.text = 'Start! Tap as much as you can!'
     synth.speak(speaking);
-    var snd = new Audio("resources/tapmusic.mp3");
-                    snd.volume = 0.3;
-                    snd.play();
+    globalmus.src = "resources/tapmusic.mp3";
+    globalmus.play();
     let rootContainer = $('#rootContainer');
     let score = 10;
     let tapButton = $('<button>Tap me!</button>');
@@ -14,7 +13,6 @@ const tapGame = function () {
 
     setTimeout(function () {
         score = score * 1000;
-        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
@@ -34,9 +32,12 @@ const stayStillGame = function () {
     speaking.text = 'Start! Stay as still as you can!'
     synth.speak(speaking);
 
-    var snd = new Audio("resources/spymusic.mp3");
-                    snd.volume = 0.3;
-                    snd.play();
+    // var snd = new Audio("resources/spymusic.mp3");
+    // snd.volume = 0.3;
+    // snd.play();
+
+    globalmus.src = "resources/spymusic.mp3";
+    globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -47,7 +48,6 @@ const stayStillGame = function () {
 
     setTimeout(function () {
         score = Math.abs(Math.round(100000 - score));
-        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
@@ -69,9 +69,12 @@ const danceGame = function () {
     speaking.text = 'Start! Dance as much as you can!'
     synth.speak(speaking);
 
-    var snd = new Audio("resources/dancemusic.mp3");
-    snd.volume = 0.3;
-    snd.play();
+    // var snd = new Audio("resources/dancemusic.mp3");
+    // snd.volume = 0.3;
+    // snd.play();
+
+    globalmus.src = "resources/dancemusic.mp3";
+    globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -82,7 +85,6 @@ const danceGame = function () {
 
     setTimeout(function () {
         score = Math.round(score);
-        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
