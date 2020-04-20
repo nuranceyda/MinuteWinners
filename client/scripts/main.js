@@ -4,6 +4,7 @@ var synth = window.speechSynthesis;
 var socket;
 var initialized = false;
 var speaking = new SpeechSynthesisUtterance();
+var lobbymus = new Audio("resources/lobbymusic.mp3");
 // speaking.pitch = 1.8;
 
 const startGame = function (next_game) {
@@ -24,7 +25,9 @@ const startGame = function (next_game) {
 
 const askForPermissions = function () {
     const initialize = function () {
-        $('#rootContainer').empty();
+        $('#rootContainer').empty();;
+        lobbymus.volume = 0.1;
+        lobbymus.play();
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
         $('#rootContainer').text(speaking.text);
@@ -36,9 +39,6 @@ const askForPermissions = function () {
             .then(response => {
                 if (response == 'granted') {
                     initialize();
-                    var snd = new Audio("resources/bensound-happyrock.mp3");
-                    snd.volume = 0.095;
-                    snd.play();
                 }
             })
             .catch(console.error)
@@ -56,9 +56,12 @@ const setupMainPage = function () {
 
     socket.on('open-wait-room', function (update) {
         initialized = true;
-        speaking.text = 'the highest score is now ' +
+        lobbymus.pause();
+        lobbymus.volume = 0.095;
+        lobbymus.play();
+        speaking.text = playerID + ' has the highest score of ' +
             update.highestScore +
-            '. And your score is ' +
+            '. You are ' + playerID + ' And your score is ' +
             myScore +
             '. The next game is  ' +
             update.nextGame +
@@ -69,6 +72,7 @@ const setupMainPage = function () {
     });
     socket.on('open-game-room', function (next_game) {
         if (initialized) {
+            lobbymus.pause();
             $('#rootContainer').empty();
             console.log('game started');
             startGame(next_game);

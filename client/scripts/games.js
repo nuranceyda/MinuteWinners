@@ -1,9 +1,11 @@
 const tapGame = function () {
     speaking.text = 'Start! Tap as much as you can!'
     synth.speak(speaking);
-
+    var snd = new Audio("resources/tapmusic.mp3");
+                    snd.volume = 0.3;
+                    snd.play();
     let rootContainer = $('#rootContainer');
-    let score = 0;
+    let score = 10;
     let tapButton = $('<button>Tap me!</button>');
     tapButton.click(function () {
         score = score + 1;
@@ -12,7 +14,7 @@ const tapGame = function () {
 
     setTimeout(function () {
         score = score * 1000;
-
+        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
@@ -27,10 +29,14 @@ const tapGame = function () {
 
 const stayStillGame = function () {
     let rootContainer = $('#rootContainer');
-    let score = 0;
+    let score = 10;
 
     speaking.text = 'Start! Stay as still as you can!'
     synth.speak(speaking);
+
+    var snd = new Audio("resources/spymusic.mp3");
+                    snd.volume = 0.3;
+                    snd.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -41,7 +47,7 @@ const stayStillGame = function () {
 
     setTimeout(function () {
         score = Math.abs(Math.round(100000 - score));
-
+        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
@@ -58,10 +64,14 @@ const stayStillGame = function () {
 
 const danceGame = function () {
     let rootContainer = $('#rootContainer');
-    let score = 0;
+    let score = 10;
 
     speaking.text = 'Start! Dance as much as you can!'
     synth.speak(speaking);
+
+    var snd = new Audio("resources/dancemusic.mp3");
+    snd.volume = 0.3;
+    snd.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -72,6 +82,7 @@ const danceGame = function () {
 
     setTimeout(function () {
         score = Math.round(score);
+        snd.pause();
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);
 
