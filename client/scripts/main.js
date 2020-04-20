@@ -26,6 +26,7 @@ const startGame = function (next_game) {
 const askForPermissions = function () {
     const initialize = function () {
         $('#rootContainer').empty();;
+        globalmus.src = "resources/lobbymusic.mp3";
         globalmus.volume = 0.3;
         globalmus.play();
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you Want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
