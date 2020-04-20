@@ -5,7 +5,7 @@ Hello!
 
 Welcome to the Minute Winners Game!
 Our game is a series of online one minute long mini-games playable on any mobile device, like your phone!
-To join, simply go to the link above on your phone and wait for the game to start! There is a brief waiting period to allow for multiple players to join.
+To join, simply go to the link above on your phone and wait for the game to start! There is a brief waiting period to allow for multiple players to join. This period may be longer when first playing. (Up to 2 minutes of waiting!)
 
 There are three games that are randomly selected to play every 30 seconds!
 
