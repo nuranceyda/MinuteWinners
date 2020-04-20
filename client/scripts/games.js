@@ -23,7 +23,7 @@ const tapGame = function () {
         });
         myScore = myScore + score;
         $('#rootContainer').empty()
-    }, 44000)
+    }, 58000)
 }
 
 const stayStillGame = function () {
@@ -59,7 +59,7 @@ const stayStillGame = function () {
         myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
-    }, 44000)
+    }, 58000)
 
 }
 
@@ -96,5 +96,5 @@ const danceGame = function () {
         myScore = myScore + score;
         window.removeEventListener('devicemotion', scoreIncrement);
         $('#rootContainer').empty()
-    }, 44000)
+    }, 58000)
 }
