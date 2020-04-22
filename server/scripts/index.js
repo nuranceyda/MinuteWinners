@@ -6,7 +6,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
-const prevGame = '';
+var prevGame = '';
 
 const selectGame = function () {
     const gamesList = ['tap-quickly', 'dance-around', 'stay-still'];
