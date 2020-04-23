@@ -1,12 +1,13 @@
 const express = require('express');
 const socketIO = require('socket.io');
+const sslRedirect = require('heroku-ssl-redirect');
+
 
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
-var enforce = require('express-sslify');
 
 
 var prevGame = '';
@@ -23,34 +24,13 @@ const selectGame = function () {
     }
 }
 
-function requireHTTPS(req, res, next) {
-    // The 'x-forwarded-proto' check is for Heroku
-    if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
-        return res.redirect('https://' + req.get('host') + req.url);
-    }
-    next();
-}
-
-
 // start express
 const server = express()
     .use(express.static('client'))
     .use((req, res) => res.sendFile(INDEX))
-    .use(enforce.HTTPS({
-        trustProtoHeader: true
-    }))
-    .use(requireHTTPS)
+    .use(sslRedirect())
     .listen(PORT, () => console.log('Listening on port ' + PORT));
 
-
-if (process.env.NODE_ENV === 'production') {
-    server.use((req, res, next) => {
-        if (req.header('x-forwarded-proto') !== 'https')
-            res.redirect(`https://${req.header('host')}${req.url}`)
-        else
-            next()
-    })
-}
 
 // start socket
 const io = socketIO(server);
