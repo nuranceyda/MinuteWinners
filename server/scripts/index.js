@@ -6,7 +6,11 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
+var enforce = require('express-sslify');
+
+
 var prevGame = '';
+
 
 const selectGame = function () {
     const gamesList = ['tap-quickly', 'dance-around', 'stay-still'];
@@ -23,6 +27,7 @@ const selectGame = function () {
 const server = express()
     .use(express.static('client'))
     .use((req, res) => res.sendFile(INDEX))
+    .use(enforce.HTTPS({ trustProtoHeader: true }))
     .listen(PORT, () => console.log('Listening on port ' + PORT));
 
 // start socket

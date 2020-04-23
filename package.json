@@ -8,6 +8,7 @@
   "main": "server/scripts/index.js",
   "dependencies": {
     "express": "latest",
+    "express-sslify": "^1.2.0",
     "socketio": "latest"
   }
 }
