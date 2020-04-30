@@ -26,7 +26,6 @@ const selectGame = function () {
 const server = express()
     .use(express.static('client'))
     .use((req, res) => res.sendFile(INDEX))
-    .use(sslRedirect())
     .listen(PORT, () => console.log('Listening on port ' + PORT));
 
 
