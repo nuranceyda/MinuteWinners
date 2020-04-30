@@ -1,7 +1,5 @@
 const express = require('express'); // rebuild
 const socketIO = require('socket.io');
-const sslRedirect = require('heroku-ssl-redirect');
-
 
 const path = require('path');
 
