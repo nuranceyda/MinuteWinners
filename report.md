@@ -1,6 +1,7 @@
 # Final Report
 
 ## Project Description
+This is a project created by Nuran Golbasi, Nikhil Komirisetti, and Kevin Lane
 
 ## Intended Audience
 
