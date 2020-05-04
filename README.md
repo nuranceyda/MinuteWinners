@@ -1,5 +1,5 @@
 # MinuteWinners
-## https://minute-winners.herokuapp.com/
+## https://fruit-ninja.herokuapp.com/
 
 Hello!
 
