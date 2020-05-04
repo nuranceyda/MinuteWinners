@@ -32,12 +32,12 @@ const askForPermissions = function () {
         globalmus.src = "resources/lobbymusic.mp3";
         globalmus.volume = 0.3;
 
-        speaking.addEventListener('end', function(event) {
+        /*speaking.addEventListener('end', function(event) {
             globalmus.play();
         });
         speaking.addEventListener('start', function(event) {
             globalmus.pause();
-        });
+        });*/
 
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
@@ -77,7 +77,7 @@ const setupMainPage = function () {
         globalmus.load();
         globalmus.volume = 0.095;
         var playerstr = playerID.substring(0, 5);
-        
+
         speaking.text = update.topPlayer.substring(0, 5) + ' has the highest score of ' +
             update.highestScore +
             '. You are ' + playerstr + ' and your score is ' +
