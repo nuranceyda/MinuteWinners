@@ -1,12 +1,11 @@
-var synth1 = window.speechSynthesis;
-var speaking1 = new SpeechSynthesisUtterance();
 
 const tapGame = function () {
-    var synth1 = window.speechSynthesis;
-    var speaking1 = new SpeechSynthesisUtterance();
-
-    speaking1.text = 'Start! Tap as much as you can!'
-    synth1.speak(speaking1);
+    let rootContainer = $('#rootContainer');
+    let score = 10;
+    
+    speaking.text = 'Start! Tap as much as you can!'
+    synth.speak(speaking);
+    
     globalmus.src = "resources/tapmusic.mp3";
     globalmus.load();
     //globalmus.play();
@@ -21,8 +20,8 @@ const tapGame = function () {
 
     setTimeout(function () {
         score = score * 1000;
-        speaking1.text = 'Times up! you got ' + score + '. ';
-        synth1.speak(speaking1);
+        speaking.text = 'Times up! you got ' + score + '. ';
+        synth.speak(speaking);
 
         socket.emit('score-update', {
             user: playerID,
