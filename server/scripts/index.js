@@ -7,19 +7,9 @@ const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
 
-
-var prevGame = '';
-
-
 const selectGame = function () {
     const gamesList = ['tap-quickly', 'dance-around', 'stay-still'];
-    const gamePicked = gamesList[Math.floor(Math.random() * gamesList.length)]
-    if (gamePicked === prevGame) {
-        selectGame();
-    } else {
-        prevGame = gamePicked;
-        return gamePicked;
-    }
+    return gamesList[Math.floor(Math.random() * gamesList.length)]
 }
 
 // start express
