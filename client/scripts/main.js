@@ -4,7 +4,7 @@ var synth = window.speechSynthesis;
 var socket;
 var initialized = false;
 var speaking = new SpeechSynthesisUtterance();
-var globalmus = new Audio("resources/lobbymusic.mp3");
+//var globalmus = new Audio("resources/lobbymusic.mp3");
 // speaking.pitch = 1.8;
 
 const startGame = function (next_game) {
@@ -29,9 +29,9 @@ const startGame = function (next_game) {
 const askForPermissions = function () {
     const initialize = function () {
         $('#rootContainer').empty();;
-        globalmus.src = "resources/lobbymusic.mp3";
+        /*globalmus.src = "resources/lobbymusic.mp3";
         globalmus.volume = 0.3;
-        globalmus.play();
+        globalmus.play();*/
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
         $('#rootContainer').text(speaking.text);
@@ -60,7 +60,7 @@ const setupMainPage = function () {
 
     socket.on('open-wait-room', function (update) {
         initialized = true;
-        globalmus.src = "resources/tapmusic.mp3";
+        /*globalmus.src = "resources/tapmusic.mp3";
         globalmus.load();
         globalmus.src = "resources/dancemusic.mp3";
         globalmus.load();
@@ -69,7 +69,7 @@ const setupMainPage = function () {
         globalmus.src = "resources/lobbymusic.mp3";
         globalmus.load();
         globalmus.volume = 0.095;
-        globalmus.play();
+        globalmus.play();*/
         var playerstr = playerID.substring(0, 5);
         speaking.text = update.topPlayer.substring(0, 5) + ' has the highest score of ' +
             update.highestScore +
