@@ -1,9 +1,9 @@
 const tapGame = function () {
     speaking.text = 'Start! Tap as much as you can!'
     synth.speak(speaking);
-    /*globalmus.src = "resources/tapmusic.mp3";
+    globalmus.src = "resources/tapmusic.mp3";
     globalmus.load();
-    globalmus.play();*/
+    //globalmus.play();
     let rootContainer = $('#rootContainer');
     let score = 10;
     let tapButton = $('<button>Tap me!</button>');
@@ -37,7 +37,7 @@ const stayStillGame = function () {
     // snd.volume = 0.3;
     // snd.play();
 
-    //globalmus.src = "resources/spymusic.mp3";
+    globalmus.src = "resources/spymusic.mp3";
     //globalmus.play();
 
     const scoreIncrement = function () {
@@ -74,8 +74,8 @@ const danceGame = function () {
     // snd.volume = 0.3;
     // snd.play();
 
-    /*globalmus.src = "resources/dancemusic.mp3";
-    globalmus.play();*/
+    globalmus.src = "resources/dancemusic.mp3";
+    //globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -106,8 +106,8 @@ const fruitNinja = function () {
     speaking.text = 'Start! Swipe your phone only if it is a fruit!'
     synth.speak(speaking);
 
-    /*globalmus.src = "resources/dancemusic.mp3";
-    globalmus.play();*/
+    globalmus.src = "resources/dancemusic.mp3";
+    //globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.acceleration.x);
