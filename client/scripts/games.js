@@ -3,7 +3,7 @@ const tapGame = function () {
     synth.speak(speaking);
     globalmus.src = "resources/tapmusic.mp3";
     globalmus.load();
-    //globalmus.play();
+    globalmus.play();
     let rootContainer = $('#rootContainer');
     let score = 10;
     let tapButton = $('<button>Tap me!</button>');
@@ -38,7 +38,7 @@ const stayStillGame = function () {
     // snd.play();
 
     globalmus.src = "resources/spymusic.mp3";
-    //globalmus.play();
+    globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -75,7 +75,7 @@ const danceGame = function () {
     // snd.play();
 
     globalmus.src = "resources/dancemusic.mp3";
-    //globalmus.play();
+    globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -107,7 +107,7 @@ const fruitNinja = function () {
     synth.speak(speaking);
 
     globalmus.src = "resources/dancemusic.mp3";
-    //globalmus.play();
+    globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.acceleration.x);
