@@ -21,6 +21,9 @@ const gameInstructions = function (game) {
         case 'stay-still':
             output += ' have to stay as still as possible! Make sure you dont sneeze!';
             break;
+        case 'fruit-ninja':
+            output += ' swipe your phone a couple to slice the fruit. Dont slice the bomb or you will lose points!';
+            break;
     }
 
     return output
