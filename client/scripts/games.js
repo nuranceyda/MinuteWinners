@@ -1,9 +1,21 @@
+var synth1 = window.speechSynthesis;
+var speaking1 = new SpeechSynthesisUtterance();
+
 const tapGame = function () {
-    speaking.text = 'Start! Tap as much as you can!'
-    synth.speak(speaking);
+    var synth1 = window.speechSynthesis;
+    var speaking1 = new SpeechSynthesisUtterance();
+
+    speaking1.text = 'Start! Tap as much as you can!'
+    synth1.speak(speaking1);
     globalmus.src = "resources/tapmusic.mp3";
     globalmus.load();
-    globalmus.play();
+    speaking1.addEventListener('end', function(event) {
+            globalmus.play();
+    });
+    speaking1.addEventListener('start', function(event) {
+        globalmus.pause();
+    });
+
     let rootContainer = $('#rootContainer');
     let score = 10;
     let tapButton = $('<button>Tap me!</button>');
@@ -14,8 +26,8 @@ const tapGame = function () {
 
     setTimeout(function () {
         score = score * 1000;
-        speaking.text = 'Times up! you got ' + score + '. ';
-        synth.speak(speaking);
+        speaking1.text = 'Times up! you got ' + score + '. ';
+        synth1.speak(speaking1);
 
         socket.emit('score-update', {
             user: playerID,

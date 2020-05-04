@@ -7,8 +7,16 @@ var speaking = new SpeechSynthesisUtterance();
 var globalmus = new Audio("resources/lobbymusic.mp3");
 // speaking.pitch = 1.8;
 
+/*speaking.addEventListener('end', function(event) {
+            globalmus.play();
+        });
+        speaking.addEventListener('start', function(event) {
+            globalmus.pause();
+        });*/
+
 const startGame = function (next_game) {
-    switch (next_game) {
+    tapGame();
+    /*switch (next_game) {
         case 'tap-quickly':
             tapGame();
             break;
@@ -20,7 +28,7 @@ const startGame = function (next_game) {
             break;
         case 'stay-still':
             stayStillGame();
-    }
+    }*/
     // setup game on screen
     // let that game run for a bit
     // stop the game, send up scores
@@ -31,13 +39,6 @@ const askForPermissions = function () {
         $('#rootContainer').empty();;
         globalmus.src = "resources/lobbymusic.mp3";
         globalmus.volume = 0.3;
-
-        /*speaking.addEventListener('end', function(event) {
-            globalmus.play();
-        });
-        speaking.addEventListener('start', function(event) {
-            globalmus.pause();
-        });*/
 
         speaking.text = 'Lets play! In this game youre playing with everyone else in the world! Do you want someone else to join? Just give them this link! Now, sit tight until the next game starts!';
         synth.speak(speaking);
