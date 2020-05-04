@@ -31,4 +31,4 @@ We also fixed timing issues that caused music and text-to-speech to be cut off b
 
 ## Future Goals
 We hope to further increase the interaction between users. We want to add the possibility to send auditory emotes to everyone in the game during the Waiting Room. We are also looking for ways to allow users to talk to each other between games, but there have been concerns to ensure the website stays kid friendly.
-We also want to develop more games to add to the rotation. We are exploring the option for an auditory “Fruit Ninja” game that allows players to hear an auditory cue and swipe their phone in that direction to slice the fruit. 
+We also want to develop more games to add to the rotation. We are exploring the option for an auditory “Sword Fight” game that allows players to hear an auditory cue and swipe their phone in that direction to slay a monster.
