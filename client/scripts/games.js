@@ -9,12 +9,7 @@ const tapGame = function () {
     synth1.speak(speaking1);
     globalmus.src = "resources/tapmusic.mp3";
     globalmus.load();
-    speaking1.addEventListener('end', function(event) {
-            globalmus.play();
-    });
-    speaking1.addEventListener('start', function(event) {
-        globalmus.pause();
-    });
+    //globalmus.play();
 
     let rootContainer = $('#rootContainer');
     let score = 10;
@@ -50,7 +45,7 @@ const stayStillGame = function () {
     // snd.play();
 
     globalmus.src = "resources/spymusic.mp3";
-    globalmus.play();
+    //globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -87,7 +82,7 @@ const danceGame = function () {
     // snd.play();
 
     globalmus.src = "resources/dancemusic.mp3";
-    globalmus.play();
+    //globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.accelerationIncludingGravity.x);
@@ -119,7 +114,7 @@ const fruitNinja = function () {
     synth.speak(speaking);
 
     globalmus.src = "resources/dancemusic.mp3";
-    globalmus.play();
+    //globalmus.play();
 
     const scoreIncrement = function () {
         score = score + Math.abs(event.acceleration.x);

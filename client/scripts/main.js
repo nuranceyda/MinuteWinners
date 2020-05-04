@@ -6,17 +6,16 @@ var initialized = false;
 var speaking = new SpeechSynthesisUtterance();
 var globalmus = new Audio("resources/lobbymusic.mp3");
 // speaking.pitch = 1.8;
-
 /*speaking.addEventListener('end', function(event) {
             globalmus.play();
-        });
-        speaking.addEventListener('start', function(event) {
+    });
+speaking.addEventListener('start', function(event) {
             globalmus.pause();
-        });*/
+    });*/
 
 const startGame = function (next_game) {
     tapGame();
-    /*switch (next_game) {
+    switch (next_game) {
         case 'tap-quickly':
             tapGame();
             break;
@@ -28,7 +27,7 @@ const startGame = function (next_game) {
             break;
         case 'stay-still':
             stayStillGame();
-    }*/
+    }
     // setup game on screen
     // let that game run for a bit
     // stop the game, send up scores
