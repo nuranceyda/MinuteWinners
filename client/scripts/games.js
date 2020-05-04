@@ -208,6 +208,7 @@ const fruitNinja = function () {
     }, 44000 + time[3])
     
     setTimeout(function () {
+        score = score * 100;
         score = Math.round(score);
         speaking.text = 'Times up! you got ' + score + '. ';
         synth.speak(speaking);

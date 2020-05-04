@@ -8,7 +8,7 @@ const INDEX = path.join(__dirname, '../../client/index.html');
 const ROOM = 'primary-room';
 
 const selectGame = function () {
-    const gamesList = ['tap-quickly', 'dance-around', 'stay-still'];
+    const gamesList = ['tap-quickly', 'dance-around', 'fruit-ninja','stay-still'];
     return gamesList[Math.floor(Math.random() * gamesList.length)]
 }
 

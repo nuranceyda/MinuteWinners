@@ -22,7 +22,7 @@ const gameInstructions = function (game) {
             output += ' have to stay as still as possible! Make sure you dont sneeze!';
             break;
         case 'fruit-ninja':
-            output += ' swipe your phone a couple to slice the fruit. Dont slice the bomb or you will lose points!';
+            output += ' swipe your phone a couple times to slice the fruit. Dont slice the bomb or you will lose points!';
             break;
     }
 
