@@ -12,13 +12,15 @@ There is a brief waiting period to allow for multiple players to join. This peri
 **Be sure your phone is not on silent mode**
 
 
-There are **three** games that are randomly selected to play every 30 seconds!
+There are **four** games that are randomly selected to play every 30 seconds!
 
 **Tricky Tapping:** tap your phone as much as possible!
 
 **Dance Around:** dance around with your phone. The more you move, the more points you earn!
 
 **Stay Sneaky Still:** keep your phone as still as possible to earn more!
+
+**Fruit Ninja:** slice the fruit by swiping your phone a couple times. Do not swip the bomb!
 
 
 After each game, the highest score of all the players is annouced, followed by your own score.
