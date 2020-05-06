@@ -1,8 +1,5 @@
 
 const tapGame = function () {
-    let rootContainer = $('#rootContainer');
-    let score = 10;
-    
     speaking.text = 'Start! Tap as much as you can!'
     synth.speak(speaking);
     
