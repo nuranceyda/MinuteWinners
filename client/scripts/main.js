@@ -14,7 +14,6 @@ speaking.addEventListener('start', function(event) {
     });*/
 
 const startGame = function (next_game) {
-    tapGame();
     switch (next_game) {
         case 'tap-quickly':
             tapGame();
